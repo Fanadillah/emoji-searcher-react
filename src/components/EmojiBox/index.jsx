@@ -1,10 +1,30 @@
+import { useState, useEffect } from "react";
+
 import PropTypes, { symbol } from "prop-types";
+import classnames from "classnames";
 
 import styles from "./Emoji.module.css";
 
 const EmojiBox = ({ title, symbol}) => {
+    const [selected, setSelected] = useState(false)
+
+    // useeffect setiap pembuatan selalu ada arrow function dan valuable
+    useEffect(() => {
+        // digunakan untuk mengubah state selected menjadi false setelah 600ms
+        // jika selected true maka akan mengubah state selected menjadi false
+        const timer = setTimeout(() => setSelected(false), 600)
+
+        return () => clearTimeout(timer)
+    }, [selected])
     return (
-        <div className={styles.emojiBox}>
+        <div
+        onClick={() => {
+            navigator.clipboard.writeText(symbol);
+            setSelected(true);
+        }}
+        className={classnames(styles.emojiBox,{
+            [styles.selected] : selected
+            })}>
             <p 
             className={styles.emoji}
             dangerouslySetInnerHTML={{
@@ -12,7 +32,9 @@ const EmojiBox = ({ title, symbol}) => {
             }}
             />
 
-            <p className={styles.emojiText}>{title}</p>
+            <p className={styles.emojiText}>
+                {selected ? 'Copied!' : title}
+            </p>
         </div>
     )
 }

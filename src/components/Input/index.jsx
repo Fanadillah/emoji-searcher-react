@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./Input.module.css";
 
 const Input = ({onChange, value}) => {
-    reurn (
+    return (
         <input
         className = {styles.input}
         onChange={onChange}

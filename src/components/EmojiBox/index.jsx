@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import PropTypes, { symbol } from "prop-types";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 
 import styles from "./Emoji.module.css";
